@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TG7 | Free VPN</title>
+<style>
+:root{
+  --bg:#03091b;--bg2:#071126;--card:#0b1730;--card2:#0d1d3a;
+  --line:#173158;--blue:#1769ed;--blue2:#0e4fc4;--text:#e8f0ff;
+  --muted:#8292ad;--green:#28d49a;--cyan:#36bfff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+body:before,body:after{
+ content:"";position:fixed;inset:auto;pointer-events:none;z-index:-2;border-radius:50%;
+ filter:blur(18px);opacity:.6;animation:float 10s ease-in-out infinite
+}
+body:before{width:280px;height:280px;top:12%;left:-120px;background:radial-gradient(circle,#0b5ee9 0,transparent 68%)}
+body:after{width:340px;height:340px;right:-160px;top:58%;background:radial-gradient(circle,#12b7ff 0,transparent 68%);animation-delay:-4s}
+@keyframes float{0%,100%{transform:translate3d(0,0,0) scale(.85)}50%{transform:translate3d(45px,-30px,0) scale(1.15)}}
+.app{max-width:760px;margin:auto;min-height:100vh;background:linear-gradient(180deg,#020819,#050d20 48%,#020817)}
+.topbar{height:58px;background:#050b1c;border-bottom:1px solid #17233b;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:sticky;top:0;z-index:30}
+.browser{display:flex;gap:12px;align-items:center;color:#dce5f4;font-size:14px}
+.dots{font-size:26px;line-height:1}
+.brandbar{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #0b1830;background:#030a1c}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:22px}
+.logo{width:37px;height:37px;border-radius:11px;background:linear-gradient(135deg,#194ca0,#58a7ff);display:grid;place-items:center;color:white;font-weight:1000;font-size:18px;box-shadow:0 0 24px #1669ed55}
+.brand-actions{display:flex;gap:9px}
+.circle{width:42px;height:42px;border-radius:14px;border:1px solid #19325b;background:#07132b;color:#a7c3ef;display:grid;place-items:center;cursor:pointer}
+main{padding:0 15px 55px}
+.hero{text-align:center;padding:38px 12px 25px}
+.kicker{display:inline-block;border:1px solid #18365f;background:#071633;color:#75a7ef;border-radius:20px;padding:3px 14px;font-size:11px}
+.hero h1{font-size:28px;line-height:1.35;margin:12px 0 8px;color:#1d83ff;text-shadow:0 0 18px #1769ed55}
+.hero p{font-size:13px;color:#a1aec2;max-width:610px;margin:auto}
+.pills{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:16px}
+.pill{background:#081630;border:1px solid #173258;border-radius:18px;padding:5px 10px;font-size:10px;color:#aab8cc}
+.pill b{color:#3ee2ae}
+.card{background:linear-gradient(180deg,#0c1932,#09152b);border:1px solid #173158;border-radius:24px;padding:17px;box-shadow:0 15px 45px #0008;margin:14px 0}
+.card-head{display:flex;gap:10px;align-items:flex-start}
+.iconbox{width:40px;height:40px;border-radius:12px;background:#0755c9;color:white;display:grid;place-items:center;font-size:20px;flex:none}
+.title{font-weight:900;font-size:18px}.sub{font-size:11px;color:#8090aa}
+.refresh{margin-top:10px;display:inline-flex;border:1px solid #1b4d91;background:#0a2a5e;color:#cfe2ff;border-radius:18px;padding:5px 10px;font-size:10px}
+.locations{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.loc{position:relative;min-height:73px;border:1px solid #17365e;border-radius:16px;background:#08152d;color:#d6e2f6;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
+.loc .flag{font-size:29px;line-height:1}.loc small{font-size:10px}.loc.active{border-color:#2781ff;background:#0b2a59;box-shadow:0 0 0 1px #2781ff inset}
+.tick{position:absolute;top:6px;left:6px;width:19px;height:19px;border-radius:50%;background:#267df3;display:none;font-size:11px;place-items:center}
+.loc.active .tick{display:grid}
+.verify{margin:15px 0;border:1px solid #5d5d5d;background:#242424;color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center;font-size:11px;direction:ltr}
+.checkhuman{display:flex;gap:8px;align-items:center}
+.checkhuman input{width:21px;height:21px}
+.cloudflare{font-size:9px;opacity:.8}
+.primary{width:100%;border:0;border-radius:14px;padding:13px;background:linear-gradient(135deg,#0e5be1,#1769ed);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 7px 22px #0756e955}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.note{text-align:center;color:#6f82a0;font-size:10px;margin-top:10px}
+.section{padding-top:18px;margin-top:20px;border-top:1px solid #0d1c35}
+.section-title{text-align:center;font-size:21px;font-weight:900;margin:0 0 14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#091731;border:1px solid #153159;border-radius:15px;padding:11px;text-align:center}.stat b{font-size:18px;color:#e8f2ff}.stat small{display:block;color:#7588a7;font-size:9px}
+.steps{display:grid;gap:9px}.step{display:flex;gap:12px;align-items:center;background:#091731;border:1px solid #153159;border-radius:17px;padding:12px}.step .num{width:38px;height:38px;border-radius:12px;background:#0b56bd;display:grid;place-items:center;flex:none}.step b{display:block;font-size:13px}.step span{font-size:10px;color:#8090aa}
+.platforms{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.platform{border:1px solid #173159;border-radius:14px;background:#08152d;padding:10px;text-align:center;font-size:10px}.platform i{display:block;font-style:normal;font-size:22px;margin-bottom:3px}
+.rewards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.reward{background:#091731;border:1px solid #153159;border-radius:15px;padding:10px;display:flex;align-items:center;justify-content:space-between;font-size:10px}.reward strong{color:#37e4aa;background:#073d33;border-radius:10px;padding:4px 7px}
+.apps{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.appitem{background:#091731;border:1px solid #153159;border-radius:15px;padding:11px;display:flex;justify-content:space-between;align-items:center}.appitem b{font-size:11px}.appitem span{font-size:20px}
+.faq{border:1px solid #153159;border-radius:13px;background:#08152d;padding:11px;margin:7px 0;cursor:pointer}.faq summary{font-size:11px}.faq div{color:#8393ad;font-size:10px;padding-top:7px}
+.big-card{padding:18px}.account-id{display:flex;align-items:center;justify-content:space-between;background:#091731;border:1px solid #153159;border-radius:17px;padding:13px;margin:10px 0}.account-id b{font-size:15px}.copy{border:0;background:#10254a;color:#9dc1f7;border-radius:10px;padding:7px 10px;cursor:pointer}
+.menu{position:fixed;inset:0;display:none;z-index:60;background:#020817eF;backdrop-filter:blur(9px)}
+.menu.open{display:block}.sheet{position:absolute;right:0;left:0;bottom:0;background:#0a1429;border:1px solid #1a3156;border-radius:28px 28px 0 0;padding:28px 24px 25px;box-shadow:0 -20px 60px #000b}.grab{width:48px;height:5px;border-radius:9px;background:#52617b;margin:0 auto 25px}.menu a{display:block;padding:13px 0;font-size:16px;font-weight:800;color:#cbd8ea}.menu .divider{height:1px;background:#1a2b49;margin:8px 0 12px}
+.tg7-result{display:none;margin-top:12px}.config-card{background:#07132a;border:1px solid #173158;border-radius:16px;padding:12px;margin-top:9px}.config-head{display:flex;justify-content:space-between;gap:10px}.config-head small{color:#68a8ff}.config{direction:ltr;text-align:left;word-break:break-all;font-size:9px;color:#9db4d6;background:#040c1c;border-radius:12px;padding:10px;margin-top:8px;line-height:1.5}.copyfull{width:100%;border:0;border-radius:11px;background:#0c55c7;color:white;padding:9px;margin-top:8px;cursor:pointer;font-weight:800}
+.buy-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.buybox{border:1px solid #173158;border-radius:16px;padding:14px;background:#091731}.buybox b{display:block;font-size:13px}.buybox span{font-size:10px;color:#8090aa}
+footer{text-align:center;color:#63758f;font-size:10px;padding:20px}
+@media(min-width:620px){.locations{grid-template-columns:repeat(5,1fr)}main{padding-left:28px;padding-right:28px}.hero h1{font-size:34px}}
+</style>
+
+<style id="tg7-extra">
+.tg7-social-row{display:flex;gap:12px;flex-wrap:wrap;margin:22px auto;max-width:720px;padding:0 16px}
+.tg7-social-btn{flex:1 1 220px;display:flex;align-items:center;gap:9px;padding:15px 17px;border:1px solid rgba(80,140,255,.18);border-radius:18px;text-decoration:none;color:inherit;background:rgba(20,32,58,.72);box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.tg7-social-btn small{opacity:.62;margin-inline-start:auto;direction:ltr}
+.tg7-controls{position:fixed;bottom:18px;left:14px;right:14px;z-index:9999;display:flex;justify-content:center;gap:9px;pointer-events:none}
+.tg7-controls button{pointer-events:auto;border:1px solid rgba(100,150,255,.25);border-radius:999px;padding:10px 14px;background:rgba(20,30,55,.92);color:inherit;backdrop-filter:blur(12px);font:inherit;cursor:pointer}
+body.tg7-light{background:#f4f7fb!important;color:#172033!important}
+body.tg7-light .tg7-social-btn{background:#fff}
+body.tg7-light .tg7-controls button{background:rgba(255,255,255,.94);color:#172033}
+</style>
+
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="browser"><span class="dots">⋮</span><span>↗</span><span>☷</span><span>TG7 - پیکربندی رایگان</span></div>
+    <div>⌄　×</div>
+  </div>
+
+  <header class="brandbar">
+    <div class="brand"><div class="logo">TG</div><span>TG7</span></div>
+    <div class="brand-actions"><button class="circle" onclick="location.hash='account'">♙</button><button class="circle" onclick="openMenu()">☰</button></div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <span class="kicker">پیکربندی‌های رایگان TG7</span>
+      <h1>پیکربندی‌های رایگان و سریع<br>در عرض چند ثانیه</h1>
+      <p>هر روز یک نسخه آزمایشی رایگان دریافت کنید؛ مکان خود را انتخاب کنید، تأیید کنید ربات نیستید و کانفیگ آماده را بگیرید.</p>
+      <div class="pills"><span class="pill">👥 بیش از ۱۸۰,۰۰۰ کاربر</span><span class="pill">🟢 تازه در ۲۴ ساعت</span><span class="pill">🎁 رایگان</span></div>
+    </section>
+
+    <section class="card" id="free">
+      <div class="card-head"><div class="iconbox">⚡</div><div><div class="title">پیکربندی رایگان امروز</div><div class="sub">یک کانفیگ انتخاب کنید و استفاده کنید</div></div></div>
+      <button class="refresh" onclick="alert('لیست امروز به‌روزرسانی شد ✅')">⚡ به‌روزرسانی امروز</button>
+      <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:11px"><span>به مکان انتخاب کنید</span><span>۲۴ مکان</span></div>
+      <div class="locations" id="locations">
+        <button class="loc active" data-loc="آلمان"><span class="tick">✓</span><span class="flag">🇩🇪</span><small>آلمان</small></button>
+        <button class="loc" data-loc="آمریکا"><span class="tick">✓</span><span class="flag">🇺🇸</span><small>متحده آمریکا</small></button>
+        <button class="loc" data-loc="ترکیه"><span class="tick">✓</span><span class="flag">🇹🇷</span><small>ترکیه</small></button>
+        <button class="loc" data-loc="امارات"><span class="tick">✓</span><span class="flag">🇦🇪</span><small>امارات</small></button>
+        <button class="loc" data-loc="فرانسه"><span class="tick">✓</span><span class="flag">🇫🇷</span><small>فرانسه</small></button>
+        <button class="loc" data-loc="انگلیس"><span class="tick">✓</span><span class="flag">🇬🇧</span><small>پادشاهی متحده</small></button>
+        <button class="loc" data-loc="روسیه"><span class="tick">✓</span><span class="flag">🇷🇺</span><small>روسیه</small></button>
+        <button class="loc" data-loc="سوئد"><span class="tick">✓</span><span class="flag">🇸🇪</span><small>سوئد</small></button>
+        <button class="loc" data-loc="اسپانیا"><span class="tick">✓</span><span class="flag">🇪🇸</span><small>اسپانیا</small></button>
+      </div>
+
+      <div class="verify">
+        <label class="checkhuman"><input id="human" type="checkbox"><span>Verify you are human</span></label>
+        <span class="cloudflare">CLOUDFLARE<br>Privacy · Terms</span>
+      </div>
+      <button class="primary" id="generate" disabled>⚡ دریافت پیکربندی　→</button>
+      <div class="note">✓ اتصال پایدار　 ✓ بدون نیاز به ثبت‌نام　 ✓ هر ۲۴ ساعت قابل دریافت</div>
+      <div class="tg7-result" id="result">
+        <div class="title" style="margin-top:15px">✅ پیکربندی آماده شد</div>
+        <div id="configs"></div>
+      </div>
+    </section>
+
+    <section class="section" id="account">
+      <h2 class="section-title">حساب کاربری</h2>
+      <div class="card big-card">
+        <div class="card-head"><div class="iconbox">▣</div><div><div class="title">GZ-DSEPSW</div><div class="sub">شناسه عمومی شما در این مرورگر ذخیره شده است</div></div></div>
+        <div class="account-id"><b>شناسه: TG7-USER</b><button class="copy" onclick="navigator.clipboard?.writeText('TG7-USER')">کپی</button></div>
+        <div class="stats"><div class="stat"><b>فعال</b><small>وضعیت حساب</small></div><div class="stat"><b>۲۴ ساعت</b><small>زمان عضویت</small></div><div class="stat"><b>۱۰۰٪</b><small>پایدار</small></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">چگونه کار می‌کند؟</h2>
+      <div class="sub" style="text-align:center;margin-bottom:13px">از فشردن تا اتصال در کمتر از یک دقیقه.</div>
+      <div class="steps">
+        <div class="step"><div class="num">⌖</div><div><b>یک مکان انتخاب کنید</b><span>کشور موردنظر خود را از لیست مکان‌ها انتخاب کنید.</span></div></div>
+        <div class="step"><div class="num">⚡</div><div><b>پیکربندی را دریافت کنید</b><span>دکمه را فشار دهید تا لینک پیکربندی برای شما آماده شود.</span></div></div>
+        <div class="step"><div class="num">⇩</div><div><b>وارد برنامه شوید و متصل شوید</b><span>لینک را کپی کنید و در برنامه دلخواه وارد کنید.</span></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">از دستگاه‌هایی که دوست دارید</h2>
+      <div class="sub" style="text-align:center;margin-bottom:13px">پیکربندی‌های ما در بیشتر سیستم‌عامل‌ها قابل استفاده هستند.</div>
+      <div class="platforms">
+        <div class="platform"><i>🤖</i>اندروید</div><div class="platform"><i></i>iOS</div><div class="platform"><i>▣</i>ویندوز</div><div class="platform"><i>🐧</i>لینوکس</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">حجم روزانه خود را افزایش دهید</h2>
+      <div class="sub" style="text-align:center;margin-bottom:12px">با فعالیت‌های ساده، حجم بیشتری دریافت کنید.</div>
+      <div class="rewards">
+        <div class="reward">👥 دعوت دوستان <strong>+100</strong></div>
+        <div class="reward">🔔 روشن کردن اعلان‌ها <strong>+200</strong></div>
+        <div class="reward">📢 فعال‌کردن اعلان‌ها <strong>+100</strong></div>
+        <div class="reward">📅 ورود روزانه <strong>+100</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">در برنامه مورد علاقه خود باز کنید</h2>
+      <div class="apps">
+        <div class="appitem"><b>Happ</b><span>↗</span></div><div class="appitem"><b>v2rayNG</b><span>↗</span></div>
+        <div class="appitem"><b>v2rayTun</b><span>↗</span></div><div class="appitem"><b>Hiddify</b><span>↗</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="stats"><div class="stat"><b>۱۷,۱۱۲</b><small>کل کاربران</small></div><div class="stat"><b>۲۷</b><small>کانفیگ فعال</small></div><div class="stat"><b>۱۰۰٪</b><small>پایداری</small></div></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">سوالات متداول</h2>
+      <details class="faq"><summary>آیا با هر گوشی کار می‌کند؟</summary><div>بله، تا زمانی که برنامه سازگار با VLESS داشته باشید.</div></details>
+      <details class="faq"><summary>چطور حجم بیشتری بگیرم؟</summary><div>از بخش افزایش حجم، فعالیت‌های روزانه را انجام دهید.</div></details>
+      <details class="faq"><summary>چگونه یک کانفیگ جدید بگیرم؟</summary><div>مکان را انتخاب کنید، تأیید انسانی را بزنید و دریافت پیکربندی را انتخاب کنید.</div></details>
+      <details class="faq"><summary>جهت پشتیبانی کجا پیام بدهم؟</summary><div>از بخش تماس، تلگرام TG7 را باز کنید.</div></details>
+    </section>
+
+    <section class="section" id="buy">
+      <h2 class="section-title">خرید</h2>
+      <div class="buy-grid">
+        <div class="buybox"><b>🛒 خرید کانفیگ</b><span>برای خرید کانفیگ به پشتیبانی پیام دهید.</span><a class="primary" style="display:block;text-align:center;margin-top:10px" href="https://t.me/ALY_DREAM" target="_blank">تلگرام</a></div>
+        <div class="buybox"><b>🏪 نمایندگی</b><span>ربات + سایت + کانفیگ</span><a class="primary" style="display:block;text-align:center;margin-top:10px" href="https://t.me/ALY_DREAM" target="_blank">درخواست نمایندگی</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="agency">
+      <h2 class="section-title">دریافت نمایندگی TG7</h2>
+      <div class="card">
+        <div class="title">🏪 پکیج نمایندگی</div>
+        <div class="sub">ربات + سایت + کانفیگ — ۱,۰۰۰,۰۰۰ تومان</div>
+        <p class="sub">برای خرید به ایتا <b style="color:#fff">@BLACKARCHLINUX</b> یا تلگرام <b style="color:#fff">@ALY_DREAM</b> پیام دهید.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><a class="primary" href="https://t.me/ALY_DREAM" target="_blank">تلگرام</a><a class="primary" href="https://eitaa.com/BLACKARCHLINUX" target="_blank">ایتا</a></div>
+      </div>
+    </section>
+
+    <footer id="contact">TG7 • کانال ایتا: @MAX_COIN • پشتیبانی: @ALY_DREAM</footer>
+  </main>
+</div>
+
+<div class="menu" id="menu" onclick="if(event.target===this)closeMenu()">
+  <div class="sheet">
+    <div class="grab"></div>
+    <a href="#home" onclick="closeMenu()">خانه</a>
+    <a href="#free" onclick="closeMenu()">کانفیگ رایگان</a>
+    <a href="#buy" onclick="closeMenu()">خرید</a>
+    <a href="#agency" onclick="closeMenu()">نمایندگی</a>
+    <a href="#account" onclick="closeMenu()">حساب کاربری</a>
+    <a href="#contact" onclick="closeMenu()">تماس</a>
+    <div class="divider"></div>
+    <a href="https://eitaa.com/MAX_COIN" target="_blank">📣 کانال ایتا @MAX_COIN</a>
+  </div>
+</div>
+
+<script>
+const CONFIGS=[
+["🇮🇷","ایران","Iran · 200 GB","vless://3073c3b3-369d-4633-93c7-4e98d734b026@104.18.0.96:8080?encryption=none&security=none&type=xhttp&headerType=none&path=%2F&host=Www.bsi.iR.Bmi.ir.blubank.sb24.ir.torob.com.Rubika.ir.SHOLE.Savbiog.sbs.&mode=auto#🍄 iran : 200.0 GB🔋 | 1m 14d 📱 (✅) TG7RoBot_8269508052_e63bad 🧑🏻‍💻"],
+["🇩🇪","آلمان","Germany · FASTLY CDN","vless://3073c3b3-369d-4633-93c7-4e98d734b026@151.101.56.7:80?encryption=none&security=none&type=xhttp&headerType=none&path=%2F&host=golobaler.global.ssl.fastly.net&mode=auto#🇩🇪 FASTLY CDN ⬛🟥"],
+["🇫🇷","فرانسه","France · FASTLY CDN","vless://3073c3b3-369d-4633-93c7-4e98d734b026@199.232.78.150:443?encryption=none&security=tls&type=xhttp&headerType=none&path=%2F&host=rechetral.global.ssl.fastly.net&mode=auto&sni=ssl.fastly.com&fp=chrome&alpn=h2#🇫🇷 FASTLY CDN ⬜🟦"],
+["🇩🇪","آلمان","Germany · WS CDN TLS","vless://3073c3b3-369d-4633-93c7-4e98d734b026@45.12.30.105:2087?encryption=none&security=tls&type=ws&headerType=none&path=%2F&host=se4znnskwowlwsmmsmspwpwowlwkekwkwowowolwlwlw.appinomobile.iR.&sni=se4znnskwowlwsmmsmspwpwowlwkekwkwowowolwlwlw.appinomobile.iR#🇩🇪 Ws Cdn Tls 🍔"],
+["🇫🇮","فنلاند","Finland · HORMOZ","vless://3073c3b3-369d-4633-93c7-4e98d734b026@172.67.156.105:443?encryption=none&security=tls&type=xhttp&headerType=none&host=YoldoZ.esvIen.sitE.&mode=auto&sni=YoldoZ.esvIen.sitE.#🔴 HORMOZ 🏞️ 🇫🇮"],
+["🇺🇸","آمریکا","USA · REALITY","vless://3073c3b3-369d-4633-93c7-4e98d734b026@FBifofO.Savfasf.ir:23525?encryption=none&security=reality&type=tcp&headerType=none&sni=de1.prointerface.info&fp=chrome&pbk=HHLiRXHdtP66bJBAJPIi50rYZUJYlQxttbAVk0SurFc&sid=cb9fcec6da38b4f9#🟪🟥 One Link REALITY 🇺🇲"],
+["🇮🇷","ایران","IranNet","vless://3073c3b3-369d-4633-93c7-4e98d734b026@104.19.76.79:8080?encryption=none&security=none&type=xhttp&headerType=none&path=%2F&host=FE1.yasharmobile.com&mode=auto#🍄 iranNet | خاله شادونه 🧚🏻"],
+["🇫🇷","فرانسه","France · Ahbarserver","vless://3073c3b3-369d-4633-93c7-4e98d734b026@Ahbar.savfasF.ir:6969?encryption=none&security=none&type=ws&headerType=none&path=%2FMelinetNew%3Fed%3D2095&host=play.google.com#🌵Ahbarserver | 👰‍♂️ اهبر سرور 🌵 🇫🇷"],
+["🇩🇪","آلمان","Germany · HORMOZ","vless://3073c3b3-369d-4633-93c7-4e98d734b026@fwe1.mobilesara.blog:443?encryption=none&security=tls&type=xhttp&headerType=none&host=fwe1.mobilesara.blog&mode=auto#🔴 HORMOZ 🏞️ 🇩🇪"]
+];
+
+let selected="آلمان";
+document.querySelectorAll(".loc").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".loc").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); selected=b.dataset.loc;
+}));
+const human=document.getElementById("human"), gen=document.getElementById("generate");
+human.addEventListener("change",()=>gen.disabled=!human.checked);
+gen.addEventListener("click",()=>{
+ const list=CONFIGS.filter(x=>x[1]===selected);
+ const use=list.length?list:CONFIGS.slice(0,1);
+ document.getElementById("result").style.display="block";
+ document.getElementById("configs").innerHTML=use.map((x,i)=>`
+  <div class="config-card"><div class="config-head"><b>${x[0]} ${x[2]}</b><small>۲۰۰ GB · ۱ ماه</small></div>
+  <div class="sub">⏱️ ۲۳ ساعت · ۵۸ دقیقه · ۵۰ ثانیه</div>
+  <div class="config">${x[3]}</div>
+  <button class="copyfull" onclick="copyCfg(${CONFIGS.indexOf(x)})">📋 کپی کانفیگ</button></div>`).join("");
+ document.getElementById("result").scrollIntoView({behavior:"smooth",block:"center"});
+});
+function copyCfg(i){
+ const text=CONFIGS[i][3];
+ if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=>alert("کانفیگ کپی شد ✅"));
+ else {const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();alert("کانفیگ کپی شد ✅")}
+}
+function openMenu(){document.getElementById("menu").classList.add("open")}
+function closeMenu(){document.getElementById("menu").classList.remove("open")}
+</script>
+
+<div class="tg7-social-row" dir="rtl">
+  <a class="tg7-social-btn" href="https://t.me/TG7config" target="_blank" rel="noopener">
+    <span>✈️</span><span>تلگرام</span><small>@TG7config</small>
+  </a>
+  <a class="tg7-social-btn" href="https://eitaa.com/MAX_COIN" target="_blank" rel="noopener">
+    <span>📣</span><span>ایتا</span><small>@MAX_COIN</small>
+  </a>
+</div>
+
+
+<div class="tg7-controls" dir="rtl">
+  <button type="button" id="tg7Lang" aria-label="تغییر زبان">فارسی / English</button>
+  <button type="button" id="tg7Theme" aria-label="تغییر حالت">☀️ روز / 🌙 شب</button>
+</div>
+
+
+<script id="tg7-extra-js">
+(function(){
+  const root=document.body;
+  const langBtn=document.getElementById('tg7Lang');
+  const themeBtn=document.getElementById('tg7Theme');
+  let english=false;
+  function setLang(){
+    document.documentElement.lang=english?'en':'fa';
+    document.documentElement.dir=english?'ltr':'rtl';
+    document.querySelectorAll('[data-fa][data-en]').forEach(el=>{
+      el.textContent=english?el.dataset.en:el.dataset.fa;
+    });
+    if(langBtn) langBtn.textContent=english?'فارسی / English':'فارسی / English';
+  }
+  if(langBtn) langBtn.addEventListener('click',()=>{english=!english;setLang();});
+  if(themeBtn) themeBtn.addEventListener('click',()=>{
+    root.classList.toggle('tg7-light');
+    localStorage.setItem('tg7-theme',root.classList.contains('tg7-light')?'light':'dark');
+  });
+  if(localStorage.getItem('tg7-theme')==='light') root.classList.add('tg7-light');
+})();
+</script>
+
+</body>
+</html>
